@@ -21,6 +21,7 @@ enum layers{
   FKEYS,
   QWERTY,
   FN,
+  FN1
 };
 
 enum {
@@ -28,21 +29,24 @@ enum {
 };
 
 enum custom_keycodes {
+	UMLAUT_UE,
+	eh,
+	UMLAUT_AE,
+	UMLAUT_OE,
+	UMLAUT_EURO,
+	UMLAUT_ESZETT,
 	LANG_IME = TD(TD_LANG_IME),
 };
 
 void lang_ime(tap_dance_state_t *state, void *user_data) {
 	 switch (state->count) {
 		case 1:
-			leader_start();
+			SEND_STRING(SS_LGUI("r"));
 			break;
 		case 2:
-			SEND_STRING(SS_LALT("q"));
+			SEND_STRING(SS_LCTL("j"));
 			break;
-		 case 3:
-			SEND_STRING(SS_LALT("`"));
-			break;
-		case 4:
+		case 3:
 			SEND_STRING(SS_LGUI(" "));
 			break;
 	}
@@ -56,50 +60,37 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	switch (keycode) {
 		case LT(FN, QK_LEAD):
 			if (record->tap.count && record->event.pressed) {leader_start();return false;}break;
+		case UMLAUT_AE:
+			if (record->event.pressed) {
+				if (get_mods() & MOD_MASK_SHIFT) {
+					SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_TAP(X_A) SS_UP(X_LSFT));
+				} else {
+					SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_UP(X_LSFT) SS_TAP(X_A));
+				}
+			}return false;
+		case UMLAUT_UE:
+			if (record->event.pressed) {
+				if (get_mods() & MOD_MASK_SHIFT) {
+					SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_TAP(X_U) SS_UP(X_LSFT));
+				} else {
+					SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_UP(X_LSFT) SS_TAP(X_U));
+				}
+			}return false;
+		case UMLAUT_OE:
+			if (record->event.pressed) {
+				if (get_mods() & MOD_MASK_SHIFT) {
+					SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_TAP(X_O) SS_UP(X_LSFT));
+				} else {
+					SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_UP(X_LSFT) SS_TAP(X_O));
+				}
+			}return false;
+		case UMLAUT_EURO:
+			if (record->event.pressed) {SEND_STRING(SS_TAP(X_CAPS) SS_TAP(X_EQL) SS_TAP(X_E));}return false;
+		case UMLAUT_ESZETT:
+			if (record->event.pressed) {SEND_STRING(SS_TAP(X_CAPS) SS_TAP(X_S) SS_TAP(X_S));}return false;
 		}
 	return true;
 };
-
-void leader_end_user(void) {
-	//Sizer Shortcuts
-	if (leader_sequence_one_key(KC_DOWN)) {
-		SEND_STRING(SS_LCTL(SS_LGUI(SS_LALT("1"))));
-	} else if (leader_sequence_two_keys(KC_LEFT, KC_LEFT)) {
-		SEND_STRING(SS_LCTL(SS_LGUI(SS_LALT("2"))));
-	} else if (leader_sequence_two_keys(KC_RIGHT, KC_RIGHT)) {
-		SEND_STRING(SS_LCTL(SS_LGUI(SS_LALT("3"))));
-	} else if (leader_sequence_three_keys(KC_LEFT, KC_LEFT, KC_UP)) {
-		SEND_STRING(SS_LCTL(SS_LGUI(SS_LALT("4"))));
-	} else if (leader_sequence_three_keys(KC_LEFT, KC_LEFT, KC_DOWN)) {
-		SEND_STRING(SS_LCTL(SS_LGUI(SS_LALT("5"))));
-	} else if (leader_sequence_three_keys(KC_RIGHT, KC_RIGHT, KC_UP)) {
-		SEND_STRING(SS_LCTL(SS_LGUI(SS_LALT("6"))));
-	} else if (leader_sequence_three_keys(KC_RIGHT, KC_RIGHT, KC_DOWN)) {
-		SEND_STRING(SS_LCTL(SS_LGUI(SS_LALT("7"))));
-	} else if (leader_sequence_one_key(KC_LEFT)) {
-		SEND_STRING(SS_LCTL(SS_LGUI(SS_LALT("8"))));
-	} else if (leader_sequence_one_key(KC_RIGHT)) {
-		SEND_STRING(SS_LCTL(SS_LGUI(SS_LALT("9"))));
-	}
-	//Umlaut Shortcuts
-	 else if (leader_sequence_one_key(KC_A)) {
-		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_UP(X_LSFT) SS_TAP(X_A));
-	}else if (leader_sequence_two_keys(KC_A, KC_A)) {
-		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_TAP(X_A) SS_UP(X_LSFT));
-	}else if (leader_sequence_one_key(KC_O)) {
-		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_UP(X_LSFT) SS_TAP(X_O));
-	}else if (leader_sequence_two_keys(KC_O, KC_O)) {
-		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_TAP(X_O) SS_UP(X_LSFT));
-	}else if (leader_sequence_one_key(KC_U)) {
-		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_UP(X_LSFT) SS_TAP(X_U));
-	}else if (leader_sequence_two_keys(KC_U, KC_U)) {
-		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_TAP(X_U) SS_UP(X_LSFT));
-	}else if (leader_sequence_one_key(KC_S)) {
-		SEND_STRING(SS_TAP(X_CAPS) SS_TAP(X_S) SS_TAP(X_S));
-	}else if (leader_sequence_one_key(KC_E)) {
-		SEND_STRING(SS_TAP(X_CAPS) SS_TAP(X_EQL) SS_TAP(X_E));
-	}
-}
 
 bool rgb_matrix_indicators_user(void) {
 	if(IS_LAYER_ON(QWERTY)) {
@@ -141,31 +132,38 @@ bool rgb_matrix_indicators_user(void) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [BASE] = LAYOUT_ortho_5x15(
-	KC_1,							KC_2,							KC_3,							KC_4,							KC_5,							KC_NUM,					_______,						_______,						_______,						_______,						KC_6,							KC_7,							KC_8,							KC_9,							KC_0,
-	KC_W, 						KC_F,							KC_M,						KC_P,							KC_V,							KC_P7,						KC_P8,						KC_P9,						_______,						_______,						KC_COMM,				KC_DOT,					KC_Q,						KC_Z,							KC_J,
-	LSFT_T(KC_R),		LCTL_T(KC_S),		LGUI_T(KC_N),		LALT_T(KC_T),		KC_B,							KC_P4,						KC_P5,						KC_P6,						_______,						_______,						KC_MINS,					RALT_T(KC_A),		RGUI_T(KC_E),		RCTL_T(KC_I),		RSFT_T(KC_H),
-	KC_X,							KC_C,							KC_L,							KC_D,						KC_G,						KC_P1,						KC_P2,						KC_P3,						KC_MSTP,				KC_MPLY,				KC_SLSH,					KC_U,							KC_O,						KC_Y,							KC_K,
-	KC_ESC,					KC_LSFT,					LANG_IME,				KC_TAB,					LT(FN, KC_SPC),	MO(FKEYS),			KC_P0,						KC_PDOT,				KC_MPRV,				KC_MNXT,				KC_ENT,					KC_LEFT,					KC_DOWN,				KC_UP,						KC_RIGHT
+	KC_1,				KC_2,				KC_3,				KC_4,				KC_5,				KC_NUM,				_______,			_______,			_______,			_______,			KC_6,				KC_7,				KC_8,				KC_9,				KC_0,
+	KC_W, 				KC_F,				KC_M,				KC_P,				KC_V,				KC_P7,				KC_P8,				KC_P9,				_______,			_______,			KC_COMM,			KC_DOT,				KC_Q,				KC_Z,				KC_J,
+	LSFT_T(KC_R),		LCTL_T(KC_S),		LGUI_T(KC_N),		LALT_T(KC_T),		KC_B,				KC_P4,				KC_P5,				KC_P6,				_______,			_______,			KC_MINS,			RALT_T(KC_A),		RGUI_T(KC_E),		RCTL_T(KC_I),		RSFT_T(KC_H),
+	KC_X,				KC_C,				KC_L,				KC_D,				KC_G,				KC_P1,				KC_P2,				KC_P3,				KC_MSTP,			KC_MPLY,			KC_SLSH,			KC_U,				KC_O,				KC_Y,				KC_K,
+	KC_ESC,				KC_LSFT,			LANG_IME,			KC_TAB,				LT(FN, KC_SPC),		MO(FKEYS),			KC_P0,				KC_PDOT,			KC_MPRV,			KC_MNXT,			LT(FN1, KC_ENT),	KC_LEFT,			KC_DOWN,			KC_UP,				KC_RIGHT
 	),
  [FKEYS] = LAYOUT_ortho_5x15(
-	_______,						_______,						_______,						_______,						_______,						KC_F10,					KC_F11,					KC_F12,					_______,						_______,						_______,						_______,						_______,						_______,						_______,
-	_______,						_______,						_______,						_______,						_______,						KC_F7,						KC_F8,						KC_F9,						_______,						_______,						_______,						_______,						_______,						_______,						_______,
-	_______,						_______,						_______,						_______,						_______,						KC_F4,						KC_F5,						KC_F6,						_______,						_______,						_______,						_______,						_______,						_______,						_______,
-	_______,						_______,						_______,						_______,						_______,						KC_F1,						KC_F2,						KC_F3,						_______,						_______,						_______,						_______,						_______,						_______,						_______,
-	_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______
+	_______,			_______,			_______,			_______,			_______,			KC_F10,				KC_F11,				KC_F12,				_______,			_______,			_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			KC_F7,				KC_F8,				KC_F9,				_______,			_______,			_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			KC_F4,				KC_F5,				KC_F6,				_______,			_______,			_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			KC_F1,				KC_F2,				KC_F3,				_______,			_______,			_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______
 	),
   [QWERTY] = LAYOUT_ortho_5x15(
-	_______,						_______,						_______,						_______,						_______,						KC_1,							KC_2,							KC_3,							KC_4,							KC_5,							_______,						_______,						_______,						_______,						_______,
-	_______,						_______,						_______,						_______,						_______,						KC_TAB, 					KC_Q,						KC_W,						KC_E,							KC_R,							_______,						_______,						_______,						_______,						_______,
-	_______,						_______,						_______,						_______,						_______,						KC_ESC, 					KC_A,							KC_S,							KC_D,						KC_F,							_______,						_______,						_______,						_______,						_______,
-	_______,						_______,						_______,						_______,						_______,						KC_LSFT,					KC_Z,							KC_X,							KC_C,							KC_V,							_______,						_______,						_______,						_______,						_______,
-	_______,						_______,						_______,						_______,						_______,						KC_LCTL,					KC_LGUI,					XXXXXXX,				KC_LALT,					KC_SPC,					_______,						_______,						_______,						_______,						_______
+	_______,			_______,			_______,			_______,			_______,			KC_1,				KC_2,				KC_3,				KC_4,				KC_5,				_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			KC_TAB, 			KC_Q,				KC_W,				KC_E,				KC_R,				_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			KC_ESC, 			KC_A,				KC_S,				KC_D,				KC_F,				_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			KC_LSFT,			KC_Z,				KC_X,				KC_C,				KC_V,				_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			KC_LCTL,			KC_LGUI,			XXXXXXX,			KC_LALT,			KC_SPC,				_______,			_______,			_______,			_______,			_______
 	),
  [FN] = LAYOUT_ortho_5x15(
-	QK_BOOT,				TG(QWERTY),		_______,						_______,						_______,						RGB_TOG,				RGB_RMOD,			RGB_MOD,				_______,						_______,						_______,						_______,						_______,						_______,						_______,
-	_______,						_______,						_______,						_______,						_______,						RGB_HUI,					RGB_SAI,					RGB_VAI,					_______,						_______,						_______,						KC_LBRC,					KC_RBRC,					KC_GRV,					_______,
-	_______,						_______,						KC_BSPC,					KC_DEL,					_______,						RGB_HUD,				RGB_SAD,				RGB_VAD,				_______,						_______,						_______,						RALT_T(KC_SCLN),	RGUI_T(KC_QUOT),	RCTL_T(KC_EQL),	RSFT_T(KC_BSLS),
-	_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,
-	_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						_______,						KC_HOME,				KC_PGDN,				KC_PGUP,				KC_END
+	QK_BOOT,			TG(QWERTY),			_______,			_______,			_______,			RGB_TOG,			RGB_RMOD,			RGB_MOD,			_______,			_______,			_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			RGB_HUI,			RGB_SAI,			RGB_VAI,			_______,			_______,			_______,			KC_LBRC,			KC_RBRC,			KC_GRV,				_______,
+	_______,			_______,			KC_BSPC,			KC_DEL,				_______,			RGB_HUD,			RGB_SAD,			RGB_VAD,			_______,			_______,			_______,			RALT_T(KC_SCLN),	RGUI_T(KC_QUOT),	RCTL_T(KC_EQL),		RSFT_T(KC_BSLS),
+	_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			KC_HOME,			KC_PGDN,			KC_PGUP,			KC_END
+	),
+ [FN1] = LAYOUT_ortho_5x15(
+	_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,
+	_______,			UMLAUT_ESZETT,		_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			UMLAUT_AE,			UMLAUT_EURO,		_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			UMLAUT_UE,			UMLAUT_OE,			_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______
 	)
 };
