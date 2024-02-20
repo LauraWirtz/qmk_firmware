@@ -83,21 +83,21 @@ void leader_end_user(void) {
 	}
 	//Umlaut Shortcuts
 	 else if (leader_sequence_one_key(KC_A)) {
-		SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P2) SS_TAP(X_P8) SS_UP(X_LALT));
+		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_UP(X_LSFT) SS_TAP(X_A));
 	}else if (leader_sequence_two_keys(KC_A, KC_A)) {
-		SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P9) SS_TAP(X_P6) SS_UP(X_LALT));
+		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_TAP(X_A) SS_UP(X_LSFT));
 	}else if (leader_sequence_one_key(KC_O)) {
-		SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P4) SS_TAP(X_P6) SS_UP(X_LALT));
+		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_UP(X_LSFT) SS_TAP(X_O));
 	}else if (leader_sequence_two_keys(KC_O, KC_O)) {
-		SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P1) SS_TAP(X_P4) SS_UP(X_LALT));
+		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_TAP(X_O) SS_UP(X_LSFT));
 	}else if (leader_sequence_one_key(KC_U)) {
-		SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P5) SS_TAP(X_P2) SS_UP(X_LALT));
+		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_UP(X_LSFT) SS_TAP(X_U));
 	}else if (leader_sequence_two_keys(KC_U, KC_U)) {
-		SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P2) SS_TAP(X_P0) SS_UP(X_LALT));
+		SEND_STRING(SS_TAP(X_CAPS) SS_DOWN(X_LSFT) SS_TAP(X_QUOT) SS_TAP(X_U) SS_UP(X_LSFT));
 	}else if (leader_sequence_one_key(KC_S)) {
-		SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P2) SS_TAP(X_P3) SS_UP(X_LALT));
+		SEND_STRING(SS_TAP(X_CAPS) SS_TAP(X_S) SS_TAP(X_S));
 	}else if (leader_sequence_one_key(KC_E)) {
-		SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P8) SS_UP(X_LALT));
+		SEND_STRING(SS_TAP(X_CAPS) SS_TAP(X_EQL) SS_TAP(X_E));
 	}
 }
 
