@@ -29,8 +29,7 @@ enum {
 };
 
 enum custom_keycodes {
-	UMLAUT_UE,
-	eh,
+	UMLAUT_UE = SAFE_RANGE,
 	UMLAUT_AE,
 	UMLAUT_OE,
 	UMLAUT_EURO,
@@ -41,13 +40,13 @@ enum custom_keycodes {
 void lang_ime(tap_dance_state_t *state, void *user_data) {
 	 switch (state->count) {
 		case 1:
-			SEND_STRING(SS_LGUI("r"));
+			SEND_STRING(SS_LGUI("r"));	//Screen Reader
 			break;
 		case 2:
-			SEND_STRING(SS_LCTL("j"));
+			SEND_STRING(SS_LCTL(" "));	//Toggle Keyboard
 			break;
 		case 3:
-			SEND_STRING(SS_LGUI(" "));
+			SEND_STRING(SS_LGUI(" "));	//none
 			break;
 	}
 }
@@ -58,8 +57,6 @@ tap_dance_action_t tap_dance_actions[] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	switch (keycode) {
-		case LT(FN, QK_LEAD):
-			if (record->tap.count && record->event.pressed) {leader_start();return false;}break;
 		case UMLAUT_AE:
 			if (record->event.pressed) {
 				if (get_mods() & MOD_MASK_SHIFT) {
@@ -153,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	_______,			_______,			_______,			_______,			_______,			KC_LCTL,			KC_LGUI,			XXXXXXX,			KC_LALT,			KC_SPC,				_______,			_______,			_______,			_______,			_______
 	),
  [FN] = LAYOUT_ortho_5x15(
-	QK_BOOT,			TG(QWERTY),			_______,			_______,			_______,			RGB_TOG,			RGB_RMOD,			RGB_MOD,			_______,			_______,			_______,			_______,			_______,			_______,			_______,
+	_______,			TG(QWERTY),			_______,			_______,			_______,			RGB_TOG,			RGB_RMOD,			RGB_MOD,			_______,			_______,			QK_BOOT,			_______,			_______,			_______,			_______,
 	_______,			_______,			_______,			_______,			_______,			RGB_HUI,			RGB_SAI,			RGB_VAI,			_______,			_______,			_______,			KC_LBRC,			KC_RBRC,			KC_GRV,				_______,
 	_______,			_______,			KC_BSPC,			KC_DEL,				_______,			RGB_HUD,			RGB_SAD,			RGB_VAD,			_______,			_______,			_______,			RALT_T(KC_SCLN),	RGUI_T(KC_QUOT),	RCTL_T(KC_EQL),		RSFT_T(KC_BSLS),
 	_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,

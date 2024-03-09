@@ -17,7 +17,7 @@ ColumnLimit: '1000'
 IndentCaseLabels: 'true'
 IndentPPDirectives: AfterHash
 IndentWidth: '4'
-MaxEmptyLinesToKeep: '1'
+MaxEmptyLinesToKeep: '2'
 PointerAlignment: Right
 SortIncludes: 'false'
 SpaceBeforeAssignmentOperators: 'true'
@@ -25,6 +25,6 @@ SpaceBeforeParens: ControlStatements
 SpaceInEmptyParentheses: 'false'
 SpacesBeforeTrailingComments: 1
 TabWidth: '4'
-UseTab: Never
+UseTab: Always
 
 ...
