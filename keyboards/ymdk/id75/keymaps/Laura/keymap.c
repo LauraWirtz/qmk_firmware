@@ -43,8 +43,7 @@ void lang_ime(tap_dance_state_t *state, void *user_data) {
 			SEND_STRING(SS_LGUI("r"));	//Screen Reader
 			break;
 		case 2:
-			SEND_STRING(SS_LCTL(" "));	//Toggle Keyboard
-			break;
+			SEND_STRING(SS_LCTL(" "));	//Toggle IME
 		case 3:
 			SEND_STRING(SS_LGUI(" "));	//none
 			break;
