@@ -37,6 +37,24 @@ enum custom_keycodes {
 	LANG_IME = TD(TD_LANG_IME),
 };
 
+
+const uint16_t PROGMEM combo_EQL[] = {KC_DOT, KC_Q, COMBO_END};
+const uint16_t PROGMEM combo_GRV[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM combo_QUOT[] = {KC_MINS, RALT_T(KC_A), COMBO_END};
+const uint16_t PROGMEM combo_BSLS[] = {KC_SLSH, KC_U, COMBO_END};
+const uint16_t PROGMEM combo_SCLN[] = {RALT_T(KC_A), RGUI_T(KC_E), COMBO_END};
+const uint16_t PROGMEM combo_LBRC[] = {RALT_T(KC_A), KC_DOT, COMBO_END};
+const uint16_t PROGMEM combo_RBRC[] = {RGUI_T(KC_E), KC_Q, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(combo_EQL, KC_EQL),
+    COMBO(combo_GRV, KC_GRV),
+    COMBO(combo_QUOT, KC_QUOT),
+    COMBO(combo_BSLS, KC_BSLS),
+    COMBO(combo_SCLN, KC_SCLN),
+    COMBO(combo_LBRC, KC_LBRC),
+    COMBO(combo_RBRC, KC_RBRC),
+};
+
 void lang_ime(tap_dance_state_t *state, void *user_data) {
 	 switch (state->count) {
 		case 1:
@@ -150,8 +168,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	),
  [FN] = LAYOUT_ortho_5x15(
 	_______,			TG(QWERTY),			_______,			_______,			_______,			RGB_TOG,			RGB_RMOD,			RGB_MOD,			_______,			_______,			QK_BOOT,			_______,			_______,			_______,			_______,
-	_______,			_______,			_______,			_______,			_______,			RGB_HUI,			RGB_SAI,			RGB_VAI,			_______,			_______,			_______,			KC_LBRC,			KC_RBRC,			KC_GRV,				_______,
-	_______,			_______,			KC_BSPC,			KC_DEL,				_______,			RGB_HUD,			RGB_SAD,			RGB_VAD,			_______,			_______,			_______,			RALT_T(KC_SCLN),	RGUI_T(KC_QUOT),	RCTL_T(KC_EQL),		RSFT_T(KC_BSLS),
+	_______,			_______,			_______,			_______,			_______,			RGB_HUI,			RGB_SAI,			RGB_VAI,			_______,			_______,			_______,			_______,			_______,			_______,			_______,
+	_______,			_______,			KC_BSPC,			KC_DEL,				_______,			RGB_HUD,			RGB_SAD,			RGB_VAD,			_______,			_______,			_______,			_______,			_______,			_______,			_______,
 	_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,
 	_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			_______,			KC_HOME,			KC_PGDN,			KC_PGUP,			KC_END
 	),
