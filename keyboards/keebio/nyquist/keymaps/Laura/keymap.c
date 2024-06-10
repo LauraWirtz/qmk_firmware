@@ -1,12 +1,6 @@
-// Copyright 2023 Danny Nguyen (danny@keeb.io)
-// SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
 
-// Each layer gets a name for readability, which is then used in the keymap matrix below.
-// The underscores don't mean anything - you can have a layer called STUFF or any other name.
-// Layer names don't all need to be of the same length, obviously, and you can also skip them
-// entirely and just use numbers.
 enum layer_names {
 	_BASE,
 	_FKEYS,
@@ -54,10 +48,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	_______,			_______,			_______,			_______,			_______,			_______,					LT(_SYM, KC_0),		_______,			_______,			_______,			_______,			_______
 	),
   [_SYM] = LAYOUT_ortho_5x12(
+	_______,			_______,			_______,			_______,			_______,			_______,					_______,			_______,			_______,			_______,			_______,			_______,
 	_______,			RGB_TOG,			RGB_RMOD,			RGB_MOD,			_______,			_______,					_______,			_______,			_______,			_______,			_______,			_______,
 	_______,			RGB_HUI,			RGB_SAI,			RGB_VAI,			RGB_SPI,			_______,					_______,			_______,			_______,			_______,			_______,			_______,
 	_______,			RGB_HUD,			RGB_SAD,			RGB_VAD,			RGB_SPD,			_______,					_______,			_______,			_______,			_______,			_______,			_______,
-	_______,			_______,			_______,			_______,			_______,			_______,					_______,			_______,			_______,			_______,			_______,			_______,
 	_______,			_______,			_______,			_______,			_______,			_______,					_______,			_______,			_______,			_______,			_______,			_______
 	)
+};
+
+bool rgb_matrix_indicators_user(void) {
+	rgb_matrix_mode(RGB_MATRIX_CUSTOM_pink_gradient);
+
+/*	rgb_matrix_set_color(36, 0x50, 0x08, 0x05);
+	rgb_matrix_set_color(37, 0x50, 0x08, 0x05);
+	rgb_matrix_set_color(38, 0x50, 0x08, 0x05);
+	rgb_matrix_set_color(52,0x50, 0x08, 0x05);
+
+	for (uint8_t i = 0; i < 72; i++) {
+		rgb_matrix_set_color(i, 3*i, 0x00, 0x00);
+	}
+*/
+	return true;
 };
