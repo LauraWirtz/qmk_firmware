@@ -41,9 +41,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_LCTL,			_______,			_______,			KC_LALT,			KC_SPC,				_______,					KC_LBRC,			KC_RBRC,			KC_LEFT,			KC_DOWN,			KC_UP,				KC_RGHT
 	),
   [_NUM] = LAYOUT_ortho_5x12(
-	_______,			_______,			_______,			_______,			_______,			_______,					_______,			_______,			_______,			_______,			_______,			QK_BOOT,
-	_______,			_______,			KC_BSPC,			KC_UP,				KC_DEL,				_______,					_______,			KC_P7,				KC_P8,				KC_P9,				KC_P0,				_______,
-	_______,			_______,			KC_LEFT,			KC_DOWN,			KC_RIGHT,			_______,					_______,			RALT_T(KC_P4),		RGUI_T(KC_P5),		RCTL_T(KC_P6),		_______,			_______,
+	_______,			_______,			_______,			_______,			_______,			_______,					_______,			KC_NUM,				KC_PSLS,			KC_PAST,			KC_PMNS,			QK_BOOT,
+	_______,			_______,			KC_BSPC,			KC_UP,				KC_DEL,				_______,					_______,			KC_P7,				KC_P8,				KC_P9,				KC_PPLS,			_______,
+	_______,			_______,			KC_LEFT,			KC_DOWN,			KC_RIGHT,			_______,					_______,			RALT_T(KC_P4),		RGUI_T(KC_P5),		RCTL_T(KC_P6),		KC_PENT,			_______,
 	_______,			_______,			_______,			_______,			_______,			_______,					_______,			KC_P1,				KC_P2,				KC_P3,				_______,			_______,
 	_______,			_______,			_______,			_______,			_______,			_______,					LT(_SYM, KC_P0),	KC_PDOT,			KC_HOME,			KC_PGDN,			KC_PGUP,			KC_END
 	),
