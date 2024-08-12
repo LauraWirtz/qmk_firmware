@@ -63,10 +63,17 @@ bool rgb_matrix_indicators_user(void) {
 				rgb_matrix_set_color(i, 0x00, 0x00, 0x00);
 			}
 		}
-	} else {
+	} else if(IS_LAYER_ON(_NUM) && host_keyboard_led_state().num_lock) {
+		for (uint8_t i = 0; i < 72; i++) {
+			if (i != 37) {
+				rgb_matrix_set_color(i, 0x00, 0x00, 0x00);
+		    }
+        }
+    } else {
 		for (uint8_t i = 0; i < 72; i++) {
 			rgb_matrix_set_color(i, 0x00, 0x00, 0x00);
 		}
 	}
+
 	return true;
 };
