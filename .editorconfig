@@ -4,12 +4,8 @@
 root = true
 
 [*]
-<<<<<<< HEAD
-indent_style = tab
-=======
 end_of_line = lf
-indent_style = space
->>>>>>> 5acc3b2b7b13e6057623091a4bced7b1d9e76cdb
+indent_style = tab
 indent_size = 4
 charset = utf-8
 trim_trailing_whitespace = true
@@ -17,7 +13,7 @@ insert_final_newline = true
 
  # To match GitHub Actions formatting
 [*.{yaml,yml}]
-indent_size = 2
+indent_size = 4
 
 [*.md]
 trim_trailing_whitespace = false
@@ -39,7 +35,7 @@ insert_final_newline = unset
 # ...except QMK's `lib/python`.
 [{*.py,lib/python/**.py}]
 end_of_line = lf
-indent_style = space
+indent_style = tab
 indent_size = 4
 charset = utf-8
 trim_trailing_whitespace = true
