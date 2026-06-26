@@ -15,10 +15,10 @@
 /* Enable num-lock LED */
 // #define NUM_LOCK_LED_INDEX 33
 
-// #define TAPPING_TERM 200
-// #define  PERMISSIVE_HOLD
+#define TAPPING_TERM 200
+#define  PERMISSIVE_HOLD
 // #define QUICK_TAP_TERM 0
-//#define TAPPING_TERM_PER_KEY
+// #define TAPPING_TERM_PER_KEY
 
 // #define LEADER_NO_TIMEOUT
 // #define LEADER_PER_KEY_TIMING
